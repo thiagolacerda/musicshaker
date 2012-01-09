@@ -14,7 +14,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QmlApplicationViewer viewer;
     viewer.rootContext()->setContextProperty("shaker", shaker);
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer.setMainQmlFile(QLatin1String("qml/MusicShaker/main.qml"));
+    viewer.setMainQmlFile(QLatin1String("qml/musicshaker/main.qml"));
     viewer.showExpanded();
 
     return app->exec();
