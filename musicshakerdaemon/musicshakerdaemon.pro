@@ -4,24 +4,24 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core dbus
 
 QT       -= gui
 
 TARGET = musicshakerdaemon
 CONFIG   += console
+CONFIG += debug
 CONFIG   -= app_bundle
-CONFIG += qdbus
 CONFIG += mobility
 
 MOBILITY += sensors
 
 TEMPLATE = app
 
-daemon.path = /etc/init/apps
-daemon.files = msdaemon.conf
+musicshakerdaemon.path = /etc/init/apps
+musicshakerdaemon.files = musicshakerdaemon.conf
 
-INSTALLS += daemon
+INSTALLS += musicshakerdaemon
 
 
 SOURCES += main.cpp \

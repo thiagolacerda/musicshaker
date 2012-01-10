@@ -2,7 +2,7 @@ Package: musicshaker
 Version: 0.0.1
 Architecture: armel
 Maintainer: Thiago de Barros Lacerda <thiagolacerda@unknown>
-Installed-Size: 196
+Installed-Size: 200
 Section: user/other
 Priority: optional
 Homepage: <insert the upstream URL, if relevant>

@@ -1,9 +1,9 @@
-5d24d1c2766d0ed078474925e8ef3e5b  opt/musicshaker/bin/musicshaker
+c516145fbe9bb8481769b3b1d76be611  opt/musicshaker/bin/musicshaker
 b1308ed8df491a849a7c02776204c0be  opt/musicshaker/qml/musicshaker/ColumnItem.qml
 ca4b25d29b7c2ae5ee69c8943a4867d6  opt/musicshaker/qml/musicshaker/MainPage.qml
 0fb8628f3b4af3f6f12059f58d91cc54  opt/musicshaker/qml/musicshaker/ServiceMenu.qml
 d2005e4f17a97aa2d0d9afae66f49074  opt/musicshaker/qml/musicshaker/main.qml
-654803f3ed2186906cce69f1d5068ea1  opt/musicshakerdaemon/bin/musicshakerdaemon
+b0ed014a0646070a726f39f8a9ddcb34  opt/musicshakerdaemon/bin/musicshakerdaemon
 58be01f792f2d291d542cb45397d9cbc  usr/share/applications/musicshaker_harmattan.desktop
 e8dc6e5efde003cfd72f370d40b4a8ac  usr/share/doc/musicshaker/changelog.gz
 3a9bfcb2d11c8d45f7cffcc0c505ac92  usr/share/doc/musicshaker/copyright
