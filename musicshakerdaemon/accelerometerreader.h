@@ -23,21 +23,14 @@ public:
 signals:
     void shakeEvent();
 
-//public slots:
-
 private:
-    qreal mean(const QList<qreal> &values) const;
-    qreal standardDeviation(const QList<qreal> &values) const;
-    void clearValues();
-
-    QList<qreal> xValues;
-    QList<qreal> yValues;
-    QList<qreal> zValues;
-
-    qreal m_SDAccelThreshold;
-    qreal m_minInterval;
-    qtimestamp m_lastShakeEventTime;
+    qreal m_threshold;
+    quint32 m_minInterval;
+    qtimestamp m_lastUpdateTime;
     QAccelerometer *m_accelerometer;
+    qreal m_lastX;
+    qreal m_lastY;
+    qreal m_lastZ;
 };
 
 #endif // ACCELEROMETERREADER_H
