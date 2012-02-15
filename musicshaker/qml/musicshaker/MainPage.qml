@@ -3,14 +3,14 @@ import com.nokia.meego 1.0
 
 Page {
     id: root
-    tools: commonTools
+    //tools: commonTools
 
     property bool shakeEnabled: enabler.checked
 
     Rectangle {
         id: header
 
-        height: 50
+        height: 90
 
         anchors {
             left: parent.left
@@ -23,6 +23,7 @@ Page {
 
             text: "Setup your App"
             color: "white"
+            font.pixelSize: 28
         }
 
         color: "#0cbadf"
@@ -57,8 +58,9 @@ Page {
         }
     }
 
-    ServiceMenu {
+    ChooseDialog {
         id: serviceMenu
+        onAccepted: print("selecionou: " + selectedIndex)
     }
 
     ScrollDecorator {

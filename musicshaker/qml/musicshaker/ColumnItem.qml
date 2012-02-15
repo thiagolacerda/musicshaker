@@ -10,7 +10,7 @@ Item {
     property alias checked: check.checked
     anchors.left: parent.left
     anchors.right: parent.right
-    height: 70
+    height: 100
 
     signal itemClicked()
     signal checkClicked()
@@ -50,6 +50,7 @@ Item {
             right: check.left
             verticalCenter: parent.verticalCenter
         }
+        font.pixelSize: 28
         opacity: root.enabled ? 1.0 : 0.5
     }
 
