@@ -1,4 +1,5 @@
 #include "musicshakeradaptor.h"
+#include "musicshakerservice.h"
 #include <QDebug>
 
 MusicShakerAdaptor::MusicShakerAdaptor(QObject *parent)
@@ -19,3 +20,8 @@ void MusicShakerAdaptor::setServiceEnabled(bool enabled)
     QMetaObject::invokeMethod(parent(), "setServiceEnabled", Q_ARG(bool, enabled));
 }
 
+void MusicShakerAdaptor::setAction(int action)
+{
+    qWarning() << "SET ACTION" << action;
+    QMetaObject::invokeMethod(parent(), "setAction", Q_ARG(MusicShakerService::Action, (MusicShakerService::Action) action));
+}

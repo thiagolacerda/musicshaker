@@ -23,6 +23,12 @@ public slots:
         qWarning() << "CALLED2: " << enabled;
         return asyncCall(QLatin1String("setServiceEnabled"), enabled);
     }
+
+    inline QDBusPendingReply<> setAction(int action)
+    {
+        qWarning() << "CALLED action: " << action;
+        return asyncCall(QLatin1String("setAction"), action);
+    }
 };
 
 #endif // MUSICSHAKERINTERFACE_H

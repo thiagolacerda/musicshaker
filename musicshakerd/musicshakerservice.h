@@ -18,17 +18,25 @@ public:
 
     bool serviceEnabled() const;
 
+    enum Action {
+        PlayPause,
+        Next,
+        Previous
+    };
+
 signals:
     void serviceEnabledChanged();
 
 private slots:
     void setServiceEnabled(bool enabled);
+    void setAction(MusicShakerService::Action action);
     void onShakeEvent();
 
 private:
     bool m_serviceEnabled;
     AccelerometerReader *m_reader;
     MAFWProxy *m_proxy;
+    Action m_action;
     //MusicShakerAdaptor *m_adaptor;
 };
 

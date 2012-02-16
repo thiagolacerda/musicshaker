@@ -6,6 +6,7 @@
 AccelerometerReader::AccelerometerReader(QObject *parent) :
     QObject(parent),
     m_minInterval(1000000),
+    m_lastUpdateTime(0),
     m_lastAccel(9.8),
     m_accelCurrent(9.8),
     m_accel(0)
@@ -28,6 +29,8 @@ void AccelerometerReader::startReading()
         m_log.remove();
     m_log.open(QIODevice::WriteOnly);
     m_inStream.setDevice(&m_log);
+    m_inStream << "started";
+    m_inStream.flush();
     m_accelerometer->start();
 }
 
@@ -41,7 +44,9 @@ bool AccelerometerReader::filter(QAccelerometerReading *reading)
 {
     qtimestamp timestamp = reading->timestamp();
     quint64 diffTime = timestamp - m_lastUpdateTime;
+    //qWarning() << "enter filter " << timestamp << m_lastUpdateTime << diffTime;
     if (diffTime > m_minInterval) {
+        //qWarning() << "inside";
         //Capture and process each accelerometer reading
         qreal x = reading->x();
         qreal y = reading->y();
@@ -55,10 +60,12 @@ bool AccelerometerReader::filter(QAccelerometerReading *reading)
         m_inStream << "x: " << x << ", y: " << y << ", z: " << z << "\n";
         m_inStream << "m_accelCurrent: " << m_accelCurrent << ", delta: " << delta << ", m_accel: " << m_accel << "\n";
         if (m_accel > 5) {
+            qWarning() << "SHAKEEE!!!!";
             m_inStream << "SHAKE\n";
             m_lastUpdateTime = timestamp;
             emit shakeEvent();
         }
+        m_inStream.flush();
     }
 
     return true;

@@ -14,6 +14,7 @@ public:
 
 public slots:
     void setServiceEnabled(bool enabled);
+    void setAction(int action);
 
 signals:
     void enableDisableService(bool enabled);

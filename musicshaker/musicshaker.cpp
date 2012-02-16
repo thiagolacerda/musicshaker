@@ -3,6 +3,7 @@
 MusicShaker::MusicShaker(QObject *parent) :
     QObject(parent)
 {
+    m_action = Next;
     m_interface = new MusicShakerInterface("com.musicshaker.MSInterface", "/Adaptor", QDBusConnection::sessionBus());
 }
 
@@ -19,4 +20,19 @@ void MusicShaker::setServiceEnabled(bool enabled)
 bool MusicShaker::serviceEnabled() const
 {
     return m_enabled;
+}
+
+void MusicShaker::setAction(Action action)
+{
+    if (m_action != action) {
+        qWarning() << "OPA " << action;
+        m_action = action;
+        m_interface->setAction((int) action);
+        emit actionChanged();
+    }
+}
+
+MusicShaker::Action MusicShaker::action() const
+{
+    return m_action;
 }

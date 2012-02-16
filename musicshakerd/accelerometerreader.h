@@ -29,7 +29,7 @@ private:
     qreal m_lastAccel;
     qreal m_accelCurrent;
     qreal m_accel;
-    quint32 m_minInterval;
+    quint64 m_minInterval;
     qtimestamp m_lastUpdateTime;
     QAccelerometer *m_accelerometer;
     QFile m_log;

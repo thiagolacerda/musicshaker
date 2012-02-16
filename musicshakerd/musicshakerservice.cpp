@@ -10,6 +10,7 @@ MusicShakerService::MusicShakerService(QObject *parent) :
                             QDBusConnection::sessionBus(), this);
     m_reader = new AccelerometerReader(this);
     connect(m_reader, SIGNAL(shakeEvent()), this, SLOT(onShakeEvent()));
+    m_action = Next;
     /*QDBusConnection connection = QDBusConnection::sessionBus();
     connection.registerObject("/Adaptor", m_adaptor);
     connection.registerService("com.musicshaker.MSInterface");
@@ -34,8 +35,28 @@ void MusicShakerService::setServiceEnabled(bool serviceEnabled)
     }
 }
 
+void MusicShakerService::setAction(MusicShakerService::Action action)
+{
+    qWarning() << "ON PARENT" << action;
+    m_action = action;
+}
+
 void MusicShakerService::onShakeEvent()
 {
-    qWarning() << "will change song" << m_proxy->isValid();
-    m_proxy->next();
+    qWarning() << "onShakeEvent";
+    switch(m_action) {
+    case PlayPause:
+        //m_proxy->
+        break;
+    case Next: {
+        qWarning() << "will change song" << m_proxy->isValid();
+        m_proxy->next();
+        break;
+    }
+    case Previous: {
+        qWarning() << "will change song previous" << m_proxy->isValid();
+        m_proxy->previous();
+        break;
+    }
+    }
 }

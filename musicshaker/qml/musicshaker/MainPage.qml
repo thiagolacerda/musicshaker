@@ -60,7 +60,10 @@ Page {
 
     ChooseDialog {
         id: serviceMenu
-        onAccepted: print("selecionou: " + selectedIndex)
+        onAccepted: {
+            print("selecionou: " + selectedIndex)
+            shaker.action = selectedIndex;
+        }
     }
 
     ScrollDecorator {
