@@ -8,7 +8,7 @@ QT       += core dbus
 
 QT       -= gui
 
-TARGET = musicshakerdaemon
+TARGET = musicshakerd
 CONFIG   += console
 CONFIG += debug
 CONFIG   -= app_bundle
@@ -18,10 +18,10 @@ MOBILITY += sensors
 
 TEMPLATE = app
 
-musicshakerdaemon.path = /etc/init/apps
-musicshakerdaemon.files = musicshakerdaemon.conf
+musicshakerd.path = /etc/init/apps
+musicshakerd.files = musicshakerd.conf
 
-INSTALLS += musicshakerdaemon
+INSTALLS += musicshakerd
 
 
 SOURCES += main.cpp \
@@ -37,6 +37,6 @@ HEADERS += \
     musicshakerservice.h
 
 contains(MEEGO_EDITION,harmattan) {
-    target.path = /opt/musicshakerdaemon/bin
+    target.path = /opt/musicshaker/bin
     INSTALLS += target
 }

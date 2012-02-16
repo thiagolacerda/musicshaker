@@ -12,7 +12,7 @@ AccelerometerReader::AccelerometerReader(QObject *parent) :
 {
     m_accelerometer = new QAccelerometer(this);
     m_accelerometer->addFilter(this);
-    m_log.setFileName("/opt/musicshakerdaemon/musicshakerlog.txt");
+    m_log.setFileName("/opt/musicshaker/musicshakerlog.txt");
 }
 
 AccelerometerReader::~AccelerometerReader()

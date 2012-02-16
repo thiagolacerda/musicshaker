@@ -29,42 +29,9 @@ AutoGenerateAegisFile
 
 -->
 <aegis>
-	<request policy="add">
-
-		<!-- Make a GSM call, send text messages (SMS). -->
-	<!--
-		<credential name="Cellular" />
-	-->
-
-		<!-- Access Facebook social data. -->
-	<!--
-		<credential name="FacebookSocial" />
-	-->
-
-		<!-- Read access to data stored in tracker. -->
-	<!--
-		<credential name="TrackerReadAccess" />
-	-->
-
-		<!-- Read and write access to data stored in tracker. -->
-	<!--
-		<credential name="TrackerWriteAccess" />
-	-->
-
-		<!-- Read Location information. -->
-	<!--
-		<credential name="Location" />
-	-->
-
-		<!-- Access to Audio, Multimedia and Camera. -->
-	<!--
-		<credential name="GRP::pulse-access" />
-		<credential name="GRP::video" />
-		<credential name="GRP::audio" />
-	-->
-
-	</request>
-
-	<for path="/opt/musicshaker/bin/musicshaker" />
-	<for path="applauncherd-launcher::/usr/bin/applauncherd.bin" id="" />
+    <request>
+        <credential name="UID::user" />
+        <credential name="GID::users" />
+        <for path="/opt/musicshaker/bin/musicshakerd"/>
+    </request>
 </aegis>

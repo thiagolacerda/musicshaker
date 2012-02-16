@@ -7,8 +7,10 @@ OTHER_FILES += \
     debian/copyright \
     debian/control \
     debian/compat \
-    debian/changelog
+    debian/changelog \
+    debian/prerm \
+    debian/postinst
 
 SUBDIRS += \
     musicshaker \
-    musicshakerdaemon
+    musicshakerd
