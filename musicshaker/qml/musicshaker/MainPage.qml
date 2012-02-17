@@ -3,7 +3,6 @@ import com.nokia.meego 1.0
 
 Page {
     id: root
-    //tools: commonTools
 
     property bool shakeEnabled: enabler.checked
 
@@ -21,7 +20,7 @@ Page {
         Label {
             anchors.centerIn: parent
 
-            text: "Setup your App"
+            text: "Setup your Shake"
             color: "white"
             font.pixelSize: 28
         }
@@ -46,8 +45,8 @@ Page {
             ColumnItem {
                 id: enabler
                 text: "Enable MusicShaker"
-                onItemClicked: print("AAAAAB");
                 onCheckedChanged: shaker.serviceEnabled = enabler.checked;
+                Component.onCompleted: checked = shaker.serviceEnabled
             }
             ColumnItem {
                 text: "Select Service"
@@ -60,10 +59,8 @@ Page {
 
     ChooseDialog {
         id: serviceMenu
-        onAccepted: {
-            print("selecionou: " + selectedIndex)
-            shaker.action = selectedIndex;
-        }
+        onAccepted: shaker.action = selectedIndex;
+        Component.onCompleted: selectedIndex = shaker.action
     }
 
     ScrollDecorator {

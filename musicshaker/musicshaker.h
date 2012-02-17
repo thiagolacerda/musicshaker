@@ -32,6 +32,7 @@ signals:
     void actionChanged();
     
 private:
+    void init();
     MusicShakerInterface *m_interface;
     bool m_enabled;
     Action m_action;

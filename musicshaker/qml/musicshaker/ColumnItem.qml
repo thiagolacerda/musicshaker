@@ -15,9 +15,6 @@ Item {
     signal itemClicked()
     signal checkClicked()
 
-    Component.onCompleted: print("enabled: " + root.enabled)
-    onEnabledChanged: print("changed: " + root.enabled)
-
     MouseArea {
         id: itemArea
         anchors.fill: parent

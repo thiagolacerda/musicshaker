@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QtDBus/QtDBus>
 #include <QDeclarativeContext>
+#include <QDeclarativeEngine>
 #include "qmlapplicationviewer.h"
 #include "musicshaker.h"
 

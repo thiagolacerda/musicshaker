@@ -2,10 +2,6 @@
 #define ACCELEROMETERREADER_H
 
 #include <QObject>
-#include <QList>
-#include <QFile>
-#include <QTextStream>
-//#include <qaccele>
 #include <qaccelerometer.h>
 
 QTM_USE_NAMESPACE
@@ -21,7 +17,9 @@ public:
 
     void startReading();
     void stopReading();
-    
+
+    bool isReading() const;
+
 signals:
     void shakeEvent();
 
@@ -32,8 +30,7 @@ private:
     quint64 m_minInterval;
     qtimestamp m_lastUpdateTime;
     QAccelerometer *m_accelerometer;
-    QFile m_log;
-    QTextStream m_inStream;
+    bool m_reading;
 };
 
 #endif // ACCELEROMETERREADER_H

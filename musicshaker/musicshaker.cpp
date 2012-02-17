@@ -3,8 +3,15 @@
 MusicShaker::MusicShaker(QObject *parent) :
     QObject(parent)
 {
-    m_action = Next;
     m_interface = new MusicShakerInterface("com.musicshaker.MSInterface", "/Adaptor", QDBusConnection::sessionBus());
+    init();
+}
+
+void MusicShaker::init()
+{
+    qWarning() << "MusicShaker::init()";
+    m_action = (Action) m_interface->action();
+    m_enabled = m_interface->serviceEnabled();
 }
 
 void MusicShaker::setServiceEnabled(bool enabled)
@@ -12,7 +19,7 @@ void MusicShaker::setServiceEnabled(bool enabled)
     if (m_enabled != enabled) {
         m_enabled = enabled;
         qWarning() << "valid:" << m_interface->isValid();
-        m_interface->setService(m_enabled);
+        m_interface->setServiceEnabled(m_enabled);
         emit serviceEnabledChanged();
     }
 }

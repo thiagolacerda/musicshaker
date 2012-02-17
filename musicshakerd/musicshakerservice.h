@@ -2,8 +2,8 @@
 #define MUSICSHAKERSERVICE_H
 
 #include <QObject>
+#include <QSettings>
 #include "accelerometerreader.h"
-#include "musicshakeradaptor.h"
 #include "mafwproxy.h"
 
 QTM_USE_NAMESPACE
@@ -15,8 +15,7 @@ class MusicShakerService : public QObject
 
 public:
     MusicShakerService(QObject *parent = 0);
-
-    bool serviceEnabled() const;
+    ~MusicShakerService();
 
     enum Action {
         PlayPause,
@@ -24,20 +23,40 @@ public:
         Previous
     };
 
+    enum MediaPlayerState {
+        Stopped,
+        Playing,
+        Paused,
+        Transitioning,
+        Unknown
+    };
+
+    bool serviceEnabled() const;
+
+    Action action() const;
+
 signals:
     void serviceEnabledChanged();
 
+public slots:
+    void setServiceEnabled(bool enabled, bool sync = true);
+    void setAction(MusicShakerService::Action action, bool sync = true);
+
 private slots:
-    void setServiceEnabled(bool enabled);
-    void setAction(MusicShakerService::Action action);
     void onShakeEvent();
+    void playbackStateChanged(int state);
 
 private:
+    void init();
+    void getMediaPlayerState();
+    void setMediaPlayerState(int state);
     bool m_serviceEnabled;
     AccelerometerReader *m_reader;
     MAFWProxy *m_proxy;
     Action m_action;
-    //MusicShakerAdaptor *m_adaptor;
+    QDBusConnection m_sessionBus;
+    MediaPlayerState m_state;
+    QSettings m_settings;
 };
 
 #endif // MUSICSHAKERSERVICE_H

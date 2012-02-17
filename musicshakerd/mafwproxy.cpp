@@ -8,4 +8,3 @@ MAFWProxy::MAFWProxy(const QString &service, const QString &path, const QDBusCon
 MAFWProxy::~MAFWProxy()
 {
 }
-
