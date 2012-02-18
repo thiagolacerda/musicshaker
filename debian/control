@@ -1,7 +1,7 @@
 Source: musicshaker
 Section: user/other
 Priority: optional
-Maintainer: Thiago de Barros Lacerda <thiagolacerda@unknown>
+Maintainer: Thiago de Barros Lacerda <thiagotbl@gmail.com>
 Build-Depends: debhelper (>= 5), libqt4-dev
 Standards-Version: 3.7.3
 Homepage: <insert the upstream URL, if relevant>

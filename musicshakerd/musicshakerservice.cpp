@@ -1,3 +1,4 @@
+#include <QSettings>
 #include "musicshakerservice.h"
 
 MusicShakerService::MusicShakerService(QObject *parent) :
@@ -5,8 +6,7 @@ MusicShakerService::MusicShakerService(QObject *parent) :
     m_serviceEnabled(false),
     m_action(Next),
     m_sessionBus(QDBusConnection::sessionBus()),
-    m_state(Unknown),
-    m_settings("LacerdaApps", "musicshaker")
+    m_state(Unknown)
 {
     qWarning() << "MusicShakerService CONSTRUCTOR";
     m_proxy = new MAFWProxy("com.nokia.mafw.renderer.MafwGstRendererPlugin.mafw_gst_renderer", "/com/nokia/mafw/renderer/mafw_gst_renderer",
@@ -17,28 +17,30 @@ MusicShakerService::MusicShakerService(QObject *parent) :
 
 MusicShakerService::~MusicShakerService()
 {
-    m_settings.setValue("action", m_action);
-    m_settings.setValue("enabled", m_serviceEnabled);
-    m_settings.sync();
+    QSettings settings;
+    settings.setValue("action", m_action);
+    settings.setValue("enabled", m_serviceEnabled);
+    settings.sync();
 }
 
 void MusicShakerService::init()
 {
+    QSettings settings;
     connect(m_reader, SIGNAL(shakeEvent()), this, SLOT(onShakeEvent()));
     getMediaPlayerState();
     m_sessionBus.connect("com.nokia.mafw.renderer.MafwGstRendererPlugin.mafw_gst_renderer",
                                            "/com/nokia/mafw/renderer/mafw_gst_renderer", MAFWProxy::staticInterfaceName(),
                                            "state_changed", this, SLOT(playbackStateChanged(int)));
 
-    if (!m_settings.contains("action"))
-        m_settings.setValue("action", MusicShakerService::Next);
+    if (!settings.contains("action"))
+        settings.setValue("action", MusicShakerService::Next);
 
-    setAction((Action) m_settings.value("action").toInt(), false);
+    setAction((Action) settings.value("action").toInt(), false);
 
-    if (!m_settings.contains("enabled"))
-        m_settings.setValue("enabled", false);
+    if (!settings.contains("enabled"))
+        settings.setValue("enabled", false);
 
-    setServiceEnabled(m_settings.value("enabled").toBool(), false);
+    setServiceEnabled(settings.value("enabled").toBool(), false);
 }
 
 void MusicShakerService::getMediaPlayerState()
@@ -72,8 +74,10 @@ void MusicShakerService::setServiceEnabled(bool serviceEnabled, bool sync)
             m_reader->stopReading();
         emit serviceEnabledChanged();
 
-        if (sync)
-            m_settings.setValue("enabled", m_serviceEnabled);
+        if (sync) {
+            QSettings settings;
+            settings.setValue("enabled", m_serviceEnabled);
+        }
     }
 }
 
@@ -83,8 +87,10 @@ void MusicShakerService::setAction(MusicShakerService::Action action, bool sync)
     if (m_action != action) {
         m_action = action;
 
-        if (sync)
-            m_settings.setValue("action", m_action);
+        if (sync) {
+            QSettings settings;
+            settings.setValue("action", m_action);
+        }
     }
 }
 

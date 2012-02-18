@@ -9,6 +9,8 @@ QTM_USE_NAMESPACE
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("LacerdaApps");
+    QCoreApplication::setApplicationName("musicshaker");
     MusicShakerService *service = new MusicShakerService();
     new MusicShakerAdaptor(service);
     qWarning() << "opa " << service;
