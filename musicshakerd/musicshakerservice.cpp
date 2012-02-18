@@ -25,12 +25,17 @@ MusicShakerService::~MusicShakerService()
 
 void MusicShakerService::init()
 {
+    log.setFileName("/opt/musicshaker/logando.txt");
+    log.open(QIODevice::WriteOnly);
+    in.setDevice(&log);
     QSettings settings;
     connect(m_reader, SIGNAL(shakeEvent()), this, SLOT(onShakeEvent()));
     getMediaPlayerState();
     m_sessionBus.connect("com.nokia.mafw.renderer.MafwGstRendererPlugin.mafw_gst_renderer",
                                            "/com/nokia/mafw/renderer/mafw_gst_renderer", MAFWProxy::staticInterfaceName(),
                                            "state_changed", this, SLOT(playbackStateChanged(int)));
+    //QFile log("/home/user/MyDocs/logando");
+    //log.open(QIODevice::WriteOnly);
 
     if (!settings.contains("action"))
         settings.setValue("action", MusicShakerService::Next);
@@ -40,6 +45,7 @@ void MusicShakerService::init()
     if (!settings.contains("enabled"))
         settings.setValue("enabled", false);
 
+    in.flush();
     setServiceEnabled(settings.value("enabled").toBool(), false);
 }
 
@@ -65,6 +71,7 @@ MusicShakerService::Action MusicShakerService::action() const
 
 void MusicShakerService::setServiceEnabled(bool serviceEnabled, bool sync)
 {
+    in << "MusicShakerService::setServiceEnabled():" << serviceEnabled << ", " << sync <<"\n";
     qWarning() << "MusicShakerService::setServiceEnabled():" << serviceEnabled;
     if (m_serviceEnabled != serviceEnabled) {
         m_serviceEnabled = serviceEnabled;
@@ -79,10 +86,12 @@ void MusicShakerService::setServiceEnabled(bool serviceEnabled, bool sync)
             settings.setValue("enabled", m_serviceEnabled);
         }
     }
+    in.flush();
 }
 
 void MusicShakerService::setAction(MusicShakerService::Action action, bool sync)
 {
+    in << "MusicShakerService::setAction():" << action << ", " << sync <<"\n";
     qWarning() << "MusicShakerService::setAction():" << action;
     if (m_action != action) {
         m_action = action;
@@ -92,10 +101,13 @@ void MusicShakerService::setAction(MusicShakerService::Action action, bool sync)
             settings.setValue("action", m_action);
         }
     }
+    in.flush();
 }
 
 void MusicShakerService::onShakeEvent()
 {
+    in << "onShake" <<"\n";
+    in.flush();
     qWarning() << "onShakeEvent";
     switch(m_action) {
     case PlayPause: {
@@ -137,4 +149,6 @@ void MusicShakerService::setMediaPlayerState(int state)
             m_reader->startReading();
     }
     qWarning() << "MusicShakerService::setMediaPlayerState():"  << m_state;
+    in << "MusicShakerService::setMediaPlayerState():"  << m_state <<"\n";
+    in.flush();
 }

@@ -2,6 +2,8 @@
 #define MUSICSHAKERSERVICE_H
 
 #include <QObject>
+#include <QFile>
+#include <QTextStream>
 #include "accelerometerreader.h"
 #include "mafwproxy.h"
 
@@ -55,6 +57,8 @@ private:
     Action m_action;
     QDBusConnection m_sessionBus;
     MediaPlayerState m_state;
+    QFile log;
+    QTextStream in;
 };
 
 #endif // MUSICSHAKERSERVICE_H
