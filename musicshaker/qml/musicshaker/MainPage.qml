@@ -17,15 +17,42 @@ Page {
             top: parent.top
         }
 
-        Label {
-            anchors.centerIn: parent
+        Item {
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                bottom: parent.bottom
+            }
+            width: childrenRect.width
 
-            text: "Setup your Shake"
-            color: "white"
-            font.pixelSize: 28
+            Label {
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: icon.right
+                    leftMargin: 6
+                }
+                verticalAlignment: Text.AlignVCenter
+
+                text: "Setup your Shake"
+                color: "white"
+                font.pixelSize: 28
+            }
+
+            Image {
+                id: icon
+                fillMode: Image.PreserveAspectFit
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    topMargin: 8
+                    bottomMargin: 8
+                }
+                source: "logo_100.png"
+            }
         }
 
-        color: "#0cbadf"
+        color: "#403d3d"
     }
 
     Flickable {

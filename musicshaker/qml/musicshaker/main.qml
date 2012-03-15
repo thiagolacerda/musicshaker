@@ -10,7 +10,11 @@ PageStackWindow {
         id: mainPage
     }
 
-    /*ToolBarLayout {
+    About {
+        id: aboutPage
+    }
+
+    ToolBarLayout {
         id: commonTools
         visible: true
         ToolIcon {
@@ -18,13 +22,25 @@ PageStackWindow {
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: (myMenu.status == DialogStatus.Closed) ? myMenu.open() : myMenu.close()
         }
-    }*/
 
-    /*Menu {
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: {
+                pageStack.pop();
+            }
+            visible: { pageStack.depth <= 1 ? false : true }
+        }
+    }
+
+    Menu {
         id: myMenu
         visualParent: pageStack
         MenuLayout {
-            MenuItem { text: qsTr("Sample menu item") }
+            MenuItem {
+                text: qsTr("About")
+                onClicked: pageStack.push(aboutPage)
+            }
         }
-    }*/
+    }
+    Component.onCompleted: theme.inverted = true;
 }
