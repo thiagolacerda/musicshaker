@@ -39,6 +39,14 @@ SOURCES += main.cpp \
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
+images.files = musicshaker80.png
+images.path = /usr/share/icons/hicolor/80x80/apps/
+
 HEADERS += \
     musicshakerinterface.h \
     musicshaker.h
+
+RESOURCES += \
+    musicshaker.qrc
+
+INSTALLS += images

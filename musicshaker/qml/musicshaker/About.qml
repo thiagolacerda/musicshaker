@@ -32,7 +32,7 @@ Page {
             width: parent.width
             spacing: 20
             Image{
-                source: "logo_100.png"
+                source: "qrc:/musicshaker100.png"
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label{

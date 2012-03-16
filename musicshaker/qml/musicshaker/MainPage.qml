@@ -6,7 +6,9 @@ Page {
 
     property bool shakeEnabled: enabler.checked
 
-    Rectangle {
+    tools: commonTools
+
+    Item {
         id: header
 
         height: 90
@@ -48,11 +50,9 @@ Page {
                     topMargin: 8
                     bottomMargin: 8
                 }
-                source: "logo_100.png"
+                source: "qrc:/musicshaker100.png"
             }
         }
-
-        color: "#403d3d"
     }
 
     Flickable {
@@ -76,7 +76,7 @@ Page {
                 Component.onCompleted: checked = shaker.serviceEnabled
             }
             ColumnItem {
-                text: "Select Service"
+                text: "Select Action"
                 enabled: root.shakeEnabled
                 onItemClicked: serviceMenu.open();
                 checkBoxVisible: false
